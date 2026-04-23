@@ -10,12 +10,12 @@ class Ball(Turtle):
 
     def create_ball(self):
         self.shape("circle")
-        self.shapesize(stretch_wid=0.45, stretch_len=0.45)
-        self.color("red")
+        self.shapesize(stretch_wid=0.5, stretch_len=0.5)
+        self.color("#f8fafc")
         self.penup()
 
     def ball_movement(self, Paddle):
-        self.fd(10)
+        self.fd(12)
         self.ball_paddle_bounce(Paddle)
         self.ball_wall_bounce()
         return self.check_game()
@@ -98,4 +98,3 @@ class Ball(Turtle):
         if self.x > 291 or self.x < -291:
             return False
         return True
-

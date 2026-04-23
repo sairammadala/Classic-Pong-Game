@@ -1,4 +1,4 @@
-from turtle import *
+from turtle import Screen, Turtle
 
 frame = Screen()
 
@@ -13,13 +13,13 @@ class Paddle(Turtle):
         t = Turtle()
         t.shape("square")
         if side == -1:
-            t.color("red")
+            t.color("#f97316")
         elif side == 1:
-            t.color("blue")
+            t.color("#38bdf8")
         t.setheading(90)
         t.speed("fastest")
         t.penup()
-        t.shapesize(stretch_len=0.5, stretch_wid=0.5)
+        t.shapesize(stretch_len=0.55, stretch_wid=0.55)
         t.goto(side * 285, -20 + i * 10)
         self.paddle.append(t)
 
@@ -36,18 +36,23 @@ class Paddle(Turtle):
 
     def motion(self, up):
         if up == 1:
-            self.up_movement()
-            self.paddle[-1].fd(10)
+            if self.paddle[-1].ycor() < 285:
+                self.up_movement()
+                self.paddle[-1].fd(10)
         elif up == -1:
-            self.down_movement()
-            self.paddle[0].fd(10)
-        return self.check_game()
+            if self.paddle[0].ycor() > -285:
+                self.down_movement()
+                self.paddle[0].fd(10)
+        return True
 
     def upwards(self):
         self.up = 1
 
     def downwards(self):
         self.up = -1
+
+    def stop(self):
+        self.up = 0
 
     def check_game(self):
         self.y1 = self.paddle[0].ycor()
